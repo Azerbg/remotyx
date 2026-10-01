@@ -33,11 +33,6 @@ export default function ContactPage() {
                 <a href="mailto:hello@remotyx.com" className="btn btn-ink">hello@remotyx.com</a>
               </div>
               <div className="contact-card">
-                <span className="eyebrow">BECOME AN EXPERT</span>
-                <p>Are you an IT professional or developer? Join our network of remote experts.</p>
-                <a href="mailto:experts@remotyx.com" className="btn btn-ink">experts@remotyx.com</a>
-              </div>
-              <div className="contact-card">
                 <span className="eyebrow">SUBMIT A REQUEST</span>
                 <p>Ready to get started? Describe your need and we'll match you with the right expert.</p>
                 <Link href="/#request" className="btn btn-accent">Start a request</Link>

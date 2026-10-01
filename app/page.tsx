@@ -87,25 +87,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="join" className="light">
-        <div className="container" style={{ paddingBottom: 24 }}>
-          <div className="banner is-dark dark dots">
-            <div className="copy">
-              <span className="eyebrow">/ FOR EXPERTS</span>
-              <h2>
-                IT technician or developer? <span className="hl">Work with clients worldwide.</span>
-              </h2>
-              <p>Receive qualified requests, work remotely on your schedule and get paid securely.</p>
-            </div>
-            <a href="mailto:experts@remotyx.com?subject=I%20want%20to%20join%20Remotyx" className="btn btn-accent">
-              Become an expert
-              <Icon name="arrow" size={18} stroke={2} />
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <Plans
+<Plans
         id="pricing"
         title="Support plans that fit."
         sub="Pay by the hour, subscribe monthly, or go Premium for unlimited support. Fully remote."
