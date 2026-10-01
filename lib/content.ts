@@ -38,7 +38,7 @@ export type ServicePageData = {
 export const SUPPORT_PLANS: Plan[] = [
   {
     name: "Hourly",
-    price: "[PRICE]",
+    price: "$32",
     unit: "/ hour",
     desc: "Pay only for the time spent. Perfect for occasional issues.",
     features: ["Billed after each remote session", "No commitment", "Response within 48 business hours"],
@@ -47,7 +47,7 @@ export const SUPPORT_PLANS: Plan[] = [
   },
   {
     name: "Monthly",
-    price: "[PRICE]",
+    price: "$90",
     unit: "/ month",
     desc: "A set number of support hours every month with your own technician.",
     features: ["Dedicated technician", "Monthly video review", "Response within 24 business hours"],
@@ -57,12 +57,12 @@ export const SUPPORT_PLANS: Plan[] = [
   },
   {
     name: "Premium",
-    price: "[PRICE]",
-    unit: "/ month",
-    desc: "Unlimited remote support, any time, with top priority.",
+    price: "Custom",
+    unit: "contract",
+    desc: "A fully tailored contract adapted to your business needs and scale.",
     features: ["Unlimited remote support, 24/7", "Priority technician", "Response within 1 hour"],
-    cta: "Choose Premium",
-    href: "/?service=support&plan=Premium#request",
+    cta: "Contact us",
+    href: "/contact",
   },
 ];
 
