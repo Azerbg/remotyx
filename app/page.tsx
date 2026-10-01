@@ -3,12 +3,54 @@ import { Check, Icon } from "@/components/Icon";
 import { HeroCard } from "@/components/HeroCard";
 import { FaqSection, Plans, Ticker } from "@/components/Sections";
 import { HOME_FAQ, SUPPORT_PLANS } from "@/lib/content";
+import { getDb } from "@/lib/mongodb";
+import { ReviewForm } from "@/components/ReviewForm";
 
 const SERVICES = [
   { n: 1, icon: "headset", title: "IT Support", items: ["Remote troubleshooting, computers and software", "Microsoft 365 and Google Workspace", "Network, VPN and backups"], href: "/it-support", cta: "Explore IT Support", dark: true },
   { n: 2, icon: "code", title: "Custom Development", items: ["Websites and mobile apps", "ERP, CRM and business tools", "Automation and API integrations"], href: "/development", cta: "Explore Development" },
   { n: 3, icon: "shield", title: "Specialized Services", items: ["Cybersecurity and audits", "Cloud and migration", "Digital transformation and training"], href: "/specialized-services", cta: "Explore Specialized" },
 ];
+
+async function ReviewsPreview() {
+  const db = await getDb();
+  const reviews = await db.collection("reviews").find({ status: "approved" }).sort({ createdAt: -1 }).limit(3).toArray();
+
+  return (
+    <section className="section light">
+      <div className="container">
+        <div className="head-row" style={{ marginBottom: 40 }}>
+          <div className="head-col">
+            <span className="eyebrow">/ REVIEWS</span>
+            <h2 className="h2">What our clients say</h2>
+          </div>
+          <Link href="/reviews" className="btn btn-ghost">See all reviews</Link>
+        </div>
+
+        {reviews.length > 0 && (
+          <div className="grid-auto" style={{ marginBottom: 48 }}>
+            {reviews.map((r) => (
+              <div key={String(r._id)} style={{ background: "#fff", border: "1px solid var(--line)", borderRadius: 20, padding: 28, display: "flex", flexDirection: "column", gap: 12 }}>
+                <span style={{ color: "#f59e0b", fontSize: 16, letterSpacing: 2 }}>{"★".repeat(r.rating)}{"☆".repeat(5 - r.rating)}</span>
+                <p style={{ margin: 0, color: "var(--ink)", lineHeight: 1.65, fontSize: 15, flex: 1 }}>"{r.message}"</p>
+                <div style={{ paddingTop: 12, borderTop: "1px solid var(--line)" }}>
+                  <div style={{ fontWeight: 600, fontSize: 14 }}>{r.name}</div>
+                  {(r.company || r.service) && <div style={{ color: "var(--muted)", fontSize: 13 }}>{[r.company, r.service].filter(Boolean).join(" · ")}</div>}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        <div style={{ background: "#fff", border: "1px solid var(--line)", borderRadius: 24, padding: "36px 40px", maxWidth: 600 }}>
+          <h3 style={{ margin: "0 0 6px", fontSize: 20, fontWeight: 700 }}>Leave a review</h3>
+          <p style={{ margin: "0 0 24px", color: "var(--muted)", fontSize: 15 }}>Worked with us? Share your experience.</p>
+          <ReviewForm />
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export default function Home() {
   return (
@@ -94,6 +136,8 @@ export default function Home() {
         plans={SUPPORT_PLANS}
         href="/#request"
       />
+
+      <ReviewsPreview />
 
       <FaqSection items={HOME_FAQ} />
     </>

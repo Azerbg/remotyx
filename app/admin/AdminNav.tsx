@@ -8,6 +8,7 @@ const LINKS = [
   { href: "/admin/requests", label: "Requests" },
   { href: "/admin/users", label: "Accounts" },
   { href: "/admin/contacts", label: "Messages" },
+  { href: "/admin/reviews", label: "Reviews" },
 ];
 
 export function AdminNav() {

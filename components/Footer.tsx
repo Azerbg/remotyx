@@ -19,6 +19,7 @@ export function Footer() {
           <div className="col">
             <span className="eyebrow">COMPANY</span>
 <Link href="/#faq">FAQ</Link>
+            <Link href="/reviews">Reviews</Link>
             <Link href="/contact">Contact</Link>
           </div>
           <div className="col">
