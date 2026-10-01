@@ -6,6 +6,8 @@ import { HOME_FAQ, SUPPORT_PLANS } from "@/lib/content";
 import { getDb } from "@/lib/mongodb";
 import { ReviewForm } from "@/components/ReviewForm";
 
+export const dynamic = "force-dynamic";
+
 const SERVICES = [
   { n: 1, icon: "headset", title: "IT Support", items: ["Remote troubleshooting, computers and software", "Microsoft 365 and Google Workspace", "Network, VPN and backups"], href: "/it-support", cta: "Explore IT Support", dark: true },
   { n: 2, icon: "code", title: "Custom Development", items: ["Websites and mobile apps", "ERP, CRM and business tools", "Automation and API integrations"], href: "/development", cta: "Explore Development" },
@@ -13,8 +15,13 @@ const SERVICES = [
 ];
 
 async function ReviewsPreview() {
-  const db = await getDb();
-  const reviews = await db.collection("reviews").find({ status: "approved" }).sort({ createdAt: -1 }).limit(3).toArray();
+  let reviews: any[] = [];
+  try {
+    const db = await getDb();
+    reviews = await db.collection("reviews").find({ status: "approved" }).sort({ createdAt: -1 }).limit(3).toArray();
+  } catch {
+    // DB unavailable — show form only
+  }
 
   return (
     <section className="section light">
@@ -52,7 +59,7 @@ async function ReviewsPreview() {
   );
 }
 
-export default function Home() {
+export default async function Home() {
   return (
     <>
       <section className="dark dots">
